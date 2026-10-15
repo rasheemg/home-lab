@@ -1,0 +1,25 @@
+- Media:
+    - Plex:
+        href: http://192.168.1.158:32400/web
+        description: Movies, TV, music
+        icon: plex.png
+        siteMonitor: http://127.0.0.1:32400/identity
+
+- Network:
+    - AdGuard Home:
+        href: http://192.168.1.158:3080
+        description: Network-wide ad blocking (DNS)
+        icon: adguard-home.png
+        siteMonitor: http://127.0.0.1:3080
+
+- Lab Management:
+    - Portainer:
+        href: https://192.168.1.158:9443
+        description: Manage containers
+        icon: portainer.png
+        container: portainer
+    - Uptime Kuma:
+        href: http://192.168.1.158:3001
+        description: Uptime monitoring
+        icon: uptime-kuma.png
+        container: uptime-kuma
