@@ -1,0 +1,38 @@
+# Sheem's Home Lab - core stack (phase 1)
+# Dashboard (Homepage) + container manager (Portainer) + uptime monitoring (Uptime Kuma)
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    network_mode: host   # shares the laptop's network so it can check Plex + AdGuard
+    environment:
+      HOMEPAGE_ALLOWED_HOSTS: "localhost:3000,127.0.0.1:3000,192.168.1.158:3000,desktop-iu4dkgu:3000"
+    volumes:
+      - ./homepage:/app/config
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    mem_limit: 256m
+
+  portainer:
+    image: portainer/portainer-ce:lts
+    container_name: portainer
+    restart: unless-stopped
+    ports:
+      - "9443:9443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+    mem_limit: 256m
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:2
+    container_name: uptime-kuma
+    restart: unless-stopped
+    network_mode: host   # shares the laptop's network so it can check Plex + AdGuard
+    volumes:
+      - uptime_kuma_data:/app/data
+    mem_limit: 256m
+
+volumes:
+  portainer_data:
+  uptime_kuma_data:
